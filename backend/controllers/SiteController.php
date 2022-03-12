@@ -8,7 +8,7 @@ use yii\filters\AccessControl;
 use common\models\LoginForm;
 use backend\models\Profile;
 use backend\models\ProfileSearch;
-
+use yii\helpers\Url;
 /**
  * Site controller
  */
@@ -19,6 +19,9 @@ class SiteController extends Controller
      */
     public function behaviors()
     {
+
+
+    
         return [
             'access' => [
                 'class' => AccessControl::className(),
@@ -61,6 +64,7 @@ class SiteController extends Controller
      * @return string
      */
     public function actionIndex()
+    
     {
         $modelprofile = new ProfileSearch();
         return $this->render('index',array('modelprofile' => $modelprofile));
@@ -74,7 +78,7 @@ class SiteController extends Controller
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+            return $this->redirect('site/login');
         }
 
         $this->layout = 'blank';
